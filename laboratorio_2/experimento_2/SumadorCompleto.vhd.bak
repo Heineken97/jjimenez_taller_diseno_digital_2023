@@ -1,0 +1,28 @@
+-- Sumador completo de 4 bits
+entity SumadorCompleto is
+    port (
+        a, b : in std_logic_vector(3 downto 0);
+        cin : in std_logic;
+        sum : out std_logic_vector(3 downto 0);
+        cout : out std_logic
+    );
+end SumadorCompleto;
+
+architecture Structural of SumadorCompleto is
+    -- Instanciamos los sumadores completos de 1 bit
+    component FullAdder
+        port (
+            a, b, cin : in std_logic;
+            sum, cout : out std_logic
+        );
+    end component;
+    
+    -- Señales de acarreo intermedias
+    signal c1, c2, c3 : std_logic;
+begin
+    -- Instanciamos los sumadores completos de 1 bit
+    FA1: FullAdder port map(a(0), b(0), cin, sum(0), c1);
+    FA2: FullAdder port map(a(1), b(1), c1, sum(1), c2);
+    FA3: FullAdder port map(a(2), b(2), c2, sum(2), c3);
+    FA4: FullAdder port map(a(3), b(3), c3, sum(3), cout);
+end Structural;
