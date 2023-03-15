@@ -48,7 +48,6 @@ db
 *.ttf
 *.css
 *.svg
-*.pdf
 
 # ModelSim output files
 *.vstf
