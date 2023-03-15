@@ -1,4 +1,4 @@
-`timescale 1ps / 1ps
+`timescale 1ps/1ps
 
 module tb_bin_to_bch_decoder;
 

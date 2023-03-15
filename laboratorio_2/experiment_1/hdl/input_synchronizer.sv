@@ -1,4 +1,4 @@
-`timescale 1ps / 1ps
+`timescale 1ps/1ps
 
 module input_synchronizer (input logic clk,
 				input logic [3:0] d,
