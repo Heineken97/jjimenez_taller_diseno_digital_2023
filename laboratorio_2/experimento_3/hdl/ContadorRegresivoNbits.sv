@@ -7,7 +7,7 @@ module ContadorRegresivoNbits #(parameter N = 8)
 	
 always @(posedge clk or negedge rst) begin
 	if (!rst) begin
-		count <= {N{1'b0}};
+		count <= {N{1'b1}};
 	end else begin
 		count <= count - 1;
 	end
