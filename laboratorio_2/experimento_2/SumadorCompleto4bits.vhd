@@ -36,41 +36,41 @@ begin
     begin
         case sum is
             when "0000" =>
-                hex_display <= "1000000"; -- 0 en hexadecimal
+                hex_display <= "0000001"; -- 0 en hexadecimal
             when "0001" =>
-                hex_display <= "1111001"; -- 1 en hexadecimal
+                hex_display <= "1001111"; -- 1 en hexadecimal
             when "0010" =>
-                hex_display <= "0100100"; -- 2 en hexadecimal
+                hex_display <= "0010010"; -- 2 en hexadecimal
             when "0011" =>
-                hex_display <= "0110000"; -- 3 en hexadecimal
+                hex_display <= "0000110"; -- 3 en hexadecimal
             when "0100" =>
-                hex_display <= "0011001"; -- 4 en hexadecimal
+                hex_display <= "1001100"; -- 4 en hexadecimal
             when "0101" =>
-                hex_display <= "0010010"; -- 5 en hexadecimal
+                hex_display <= "0100100"; -- 5 en hexadecimal
             when "0110" =>
-                hex_display <= "0000010"; -- 6 en hexadecimal
+                hex_display <= "0100000"; -- 6 en hexadecimal
             when "0111" =>
-                hex_display <= "1111000"; -- 7 en hexadecimal
+                hex_display <= "0001111"; -- 7 en hexadecimal
             when "1000" =>
                 hex_display <= "0000000"; -- 8 en hexadecimal
             when "1001" =>
-                hex_display <= "0011000"; -- 9 en hexadecimal
+                hex_display <= "0001100"; -- 9 en hexadecimal
             when "1010" =>
                 hex_display <= "0001000"; -- A en hexadecimal
             when "1011" =>
-                hex_display <= "0000011"; -- B en hexadecimal
+                hex_display <= "1100000"; -- B en hexadecimal
             when "1100" =>
-                hex_display <= "1000110"; -- C en hexadecimal
+                hex_display <= "0110001"; -- C en hexadecimal
             when "1101" =>
-                hex_display <= "0100001"; -- D en hexadecimal
+                hex_display <= "1000010"; -- D en hexadecimal
             when "1110" =>
-                hex_display <= "0000110"; -- E en hexadecimal
+                hex_display <= "0110000"; -- E en hexadecimal
             when "1111" =>
-                hex_display<= "0001110"; -- F en hexadecimal
-				when others => 
-					 hex_display <= "-------"; -- Error, mostrar guiones en el display
-					 end case;
-				 end process;
-		end architecture;
+                hex_display<= "0111000"; -- F en hexadecimal
+			when others => 
+				  hex_display<= "1111111"; -- error
+		 end case;
+	 end process;
+end architecture;
 
 
