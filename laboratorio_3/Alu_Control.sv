@@ -1,21 +1,84 @@
-module Alu_Control #(parameter N=8)(
+module Alu_Control #(parameter NUMPAR=8)(
   input [4:0] codigoOP,
-  input [N-1:0] operandoA,
-  input [N-1:0] operandoB,
-  output reg [N-1:0] resultado
+  input [NUMPAR-1:0] operandoA,
+  input [NUMPAR-1:0] operandoB,
+  output reg [NUMPAR-1:0] resultado,
+  output reg N,
+  output reg Z,
+  output reg C,
+  output reg V
 );
+reg [NUMPAR:0] tempResult; // variable temporal para almacenar el resultado
+reg [NUMPAR:0] tempCarry; // variable temporal para almacenar el acarreo
+reg [NUMPAR:0] tempOverflow; // variable temporal para almacenar el desbordamiento
+
 always @(*) begin
   case (codigoOP)
-    5'b00000: resultado = Adder(operandoA, operandoB);
-    5'b00001: resultado = Sub(operandoA, operandoB);
-    5'b00101: resultado = And(operandoA, operandoB);
-    5'b00110: resultado = Or(operandoA, operandoB);
-    5'b01000: resultado = Xor(operandoA, operandoB);
-    5'b00010: resultado = Mult(operandoA, operandoB);
-    5'b00011: resultado = Div(operandoA, operandoB);
-    5'b00100: resultado = Mod(operandoA, operandoB);
-    5'b10000: resultado = shiftL (operandoA, operandoB);
-    default: resultado = {N{1'b0}}; // código de operación inválido
-  endcase
-end
+	 5'b00000: begin // add
+      {C, tempResult} = Adder(operandoA, operandoB);
+      resultado = tempResult[NUMPAR-1:0]; 
+      N = resultado[NUMPAR-1]; 
+      Z = (resultado == 0);
+      V = (operandoA[NUMPAR-1] == operandoB[NUMPAR-1] && operandoA[NUMPAR-1] != result[NUMPAR-1]); 
+    end
+	 5'b00001: begin //sub
+      {C, tempResult} = Sub(operandoA, operandoB)
+      resultado = tempResult[NUMPAR-1:0]; 
+      N = resultado[NUMPAR-1]; 
+      Z = (resultado == 0); 
+      V = (operandoA[NUMPAR-1] != operandoB[NUMPAR-1] && operandoA[NUMPAR-1] != resultado[NUMPAR-1]); 
+    end
+    5'b00101: begin // and
+      resultado = And(operandoA, operandoB); 
+      N = resultado[NUMPAR-1]; 
+      Z = (resultado == 0); 
+      C = 0; 
+      V = 0;
+    end
+    5'b00110: begin // or
+      resultado = Or(operandoA, operandoB); 
+      N = resultado[NUMPAR-1];
+      Z = (resultado == 0); 
+      C = 0; 
+      V = 0; 
+    end
+    5'b01000: begin // xor
+      resultado = Xor(operandoA, operandoB); 
+      N = resultado[NUMPAR-1]; 
+      Z = (resultado == 0); 
+      C = 0; 
+      V = 0; 
+    end
+    5'b00010: begin // mult
+      resultado = Mult(operandoA, operandoB);
+      N = resultado[NUMPAR-1]; 
+      Z = (resultado == 0); 
+      C = 0; 
+      V = (resultado[NUMPAR*2-1:NUMPAR] != ((resultado[NUMPAR-1] == operandoA[NUMPAR-1]) ? {NUMPAR{1'b0}} : {NUMPAR{1'b1}})); // desbordamiento
+    end
+	 5'b00011: begin // div
+      resultado = Div(operandoA, operandoB);
+      N = resultado[NUMPAR-1]; 
+      Z = (resultado == 0); 
+      C = 0; 
+      V = 0; 
+    end
+    5'b00100: begin // mod
+      resultado = Mod(operandoA, operandoB);
+      N = resultado[NUMPAR-1]; 
+      Z = (resultado == 0); 
+      C = 0; 
+      V = 0; 
+    end
+    5'b10000: begin // shift left
+      resultado = shiftL (operandoA, operandoB);
+      N = resultado[NUMPAR-1]; 
+      Z = (resultado == 0); 
+      C = (operandoA[NUMPAR-operandoB-1] == 1'b1); 
+      V = 0; 
+    end
+    default: resultado = {NUMPAR{1'b0}}, N = {NUMPAR{1'b0}}, Z = {NUMPAR{1'b0}}, C = {NUMPAR{1'b0}}, V = {NUMPAR{1'b0}} ; // código de operación inválido
+	 endcase
+	end
+
 endmodule
