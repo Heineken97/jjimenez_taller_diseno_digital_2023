@@ -2,15 +2,15 @@ module Alu_Control #(parameter NUMPAR=8)(
   input [4:0] codigoOP,
   input [NUMPAR-1:0] operandoA,
   input [NUMPAR-1:0] operandoB,
-  output reg [NUMPAR-1:0] resultado,
-  output reg N,
-  output reg Z,
-  output reg C,
-  output reg V
+  output logic [NUMPAR-1:0] resultado,
+  output logic N,
+  output logic Z,
+  output logic C,
+  output logic V
 );
-reg [NUMPAR:0] tempResult; // variable temporal para almacenar el resultado
-reg [NUMPAR:0] tempCarry; // variable temporal para almacenar el acarreo
-reg [NUMPAR:0] tempOverflow; // variable temporal para almacenar el desbordamiento
+logic [NUMPAR:0] tempResult; // variable temporal para almacenar el resultado
+logic [NUMPAR:0] tempCarry; // variable temporal para almacenar el acarreo
+logic [NUMPAR:0] tempOverflow; // variable temporal para almacenar el desbordamiento
 
 always @(*) begin
   case (codigoOP)
@@ -19,10 +19,10 @@ always @(*) begin
       resultado = tempResult[NUMPAR-1:0]; 
       N = resultado[NUMPAR-1]; 
       Z = (resultado == 0);
-      V = (operandoA[NUMPAR-1] == operandoB[NUMPAR-1] && operandoA[NUMPAR-1] != result[NUMPAR-1]); 
+      V = (operandoA[NUMPAR-1] == operandoB[NUMPAR-1] && operandoA[NUMPAR-1] != resultado[NUMPAR-1]); 
     end
 	 5'b00001: begin //sub
-      {C, tempResult} = Sub(operandoA, operandoB)
+      {C, tempResult} = Sub(operandoA, operandoB);
       resultado = tempResult[NUMPAR-1:0]; 
       N = resultado[NUMPAR-1]; 
       Z = (resultado == 0); 
@@ -77,8 +77,8 @@ always @(*) begin
       C = (operandoA[NUMPAR-operandoB-1] == 1'b1); 
       V = 0; 
     end
-    default: resultado = {NUMPAR{1'b0}}, N = {NUMPAR{1'b0}}, Z = {NUMPAR{1'b0}}, C = {NUMPAR{1'b0}}, V = {NUMPAR{1'b0}} ; // código de operación inválido
-	 endcase
-	end
+    //default: resultado = {NUMPAR{1'b0}}, N = {NUMPAR{1'b0}}, Z = {NUMPAR{1'b0}}, C = {NUMPAR{1'b0}}, V = {NUMPAR{1'b0}} ; // código de operación inválido
+	endcase
+end
 
 endmodule
