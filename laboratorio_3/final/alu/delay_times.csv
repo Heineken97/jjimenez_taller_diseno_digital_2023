@@ -1,0 +1,11 @@
+﻿Slack,From Node,To Node,Launch Clock,Latch Clock,Relationship,Clock Skew,Data Delay
+1.396,change_switches,register:uut_scw|q[0],change_switch_clk,clk,5,3.437,6.871
+4.667,register:uut_sr|q[2],register:uut_sdu|q[1],clk,clk,10,-0.075,5.088
+4.672,register:uut_sr|q[2],register:uut_sdu|q[0],clk,clk,10,-0.069,5.089
+4.677,register:uut_sr|q[2],register:uut_sdu|q[2],clk,clk,10,-0.071,5.082
+4.691,register:uut_sr|q[2],register:uut_sdu|q[6],clk,clk,10,-0.075,5.064
+4.7,register:uut_sr|q[2],register:uut_sdu|q[5],clk,clk,10,-0.071,5.059
+4.745,register:uut_sr|q[2],register:uut_sdu|q[3],clk,clk,10,-0.071,5.014
+4.773,register:uut_sr|q[2],register:uut_sdu|q[4],clk,clk,10,-0.071,4.986
+4.84,register:uut_sr|q[2],register:uut_sdu|q[3],clk,clk,10,-0.071,4.919
+4.856,register:uut_sr|q[3],register:uut_sdu|q[1],clk,clk,10,-0.075,4.899

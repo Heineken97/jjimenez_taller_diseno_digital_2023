@@ -1,103 +1,29 @@
-module top_module(
-	 input logic clk,
-	 input logic reset,
-    input logic change_switches,
-    input logic [7:0] switches,
-    output logic [6:0] display_units,
-    output logic [6:0] display_tens,
-    output logic [6:0] display_sign,
-    output logic [3:0] result,
-    output logic [3:0] flags,
-	 output	logic [1:0] leftover_leds
-);	
+create_clock -period 10.0 -name clk -waveform {0.0 5.0} [get_ports clk]
 
-	 logic [7:0] sync_switches;
-	 logic sync_change_switches;
-	 logic [6:0] sync_display_units;
-    logic [6:0] sync_display_tens;
-    logic [6:0] sync_display_sign;
-    logic [3:0] sync_result;
-    logic [3:0] sync_flags;
-	 
-	    // Asignar las entradas de la ALU según el mapeo de los switches
-    logic [3:0] a;
-    logic [3:0] b;
-    logic [3:0] uc;
-    logic [3:0] num_units;
-    logic [3:0] num_tens;
+create_clock -period 10.0 -name reset -waveform {0.0 5.0} [get_ports reset]
 
-	 
+derive_pll_clocks
 
-	register #(8) uut_rsw(.clk(clk), .reset(~reset), 
-		.d(switches), .q(sync_switches));
-		
-	register #(1) uut_scw(.clk(clk), .reset(~reset), 
-		.d(change_switches), .q(sync_change_switches));
-		
-	register #(7) uut_sdu(.clk(clk), .reset(~reset), 
-		.d(sync_display_units), .q(display_units));
-		
-	register #(7) uut_sdt(.clk(clk), .reset(~reset), 
-		.d(sync_display_tens), .q(display_tens));
-		
-	register #(7) uut_sds(.clk(clk), .reset(~reset), 
-		.d(sync_display_sign), .q(display_sign));
-		
-	register #(4) uut_sr(.clk(clk), .reset(~reset), 
-		.d(sync_result), .q(result));
-		
-	register #(4) uut_sf(.clk(clk), .reset(~reset), 
-		.d(sync_flags), .q(flags));
+set_false_path -from [get_ports reset]
 
+set_false_path -from [get_ports change_switches]
 
-	
+set_false_path -from [get_ports switches]
 
- 
-   always @(*) begin
-			leftover_leds = 2'b00;
-        if (sync_change_switches) begin
-            uc = sync_switches[7:4];
-        end else begin;
-            a = sync_switches[7:4];
-            b = sync_switches[3:0];
-        end
-   end
-	
+set_false_path -from [get_ports leftover_leds]
 
-	alu #(4) dut(
-        .a(a),
-        .b(b),
-        .uc(uc),
-        .result(sync_result), 
-        .n(sync_flags[3]),
-        .z(sync_flags[2]),
-        .c(sync_flags[1]),
-        .v(sync_flags[0])
-    );
+set_max_delay 5.0 -from [get_ports switches] -to [get_cells uut_rsw/d]
 
+set_max_delay 5.0 -from [get_ports change_switches] -to [get_cells uut_scw/d]
 
-     bin_converter uut_converter(
-        .bin({flags[1], result}),
-        .bin_unit(num_units),
-        .bin_ten(num_tens)
-    );
+set_max_delay 5.0 -from [get_cells uut_rsw/q] -to [get_cells dut/a], [get_cells uut_unit_d/bin_number], [get_cells uut_converter/bin]
 
-    // unit segments
-    bin_to_bcd_decoder uut_unit_d(
-        .bin_number(num_units),
-        .bcd_number(sync_display_units)
-    );
+set_max_delay 5.0 -from [get_cells uut_scw/q] -to [get_cells dut/uc], [get_cells uut_sign/n]
 
-    // ten segments
-    bin_to_bcd_decoder uut_ten_d(
-        .bin_number(num_tens),
-        .bcd_number(sync_display_tens)
-    );
-	 
-	sign_to_display uut_sign(
-		.n(flags[3]),  
-		.seg(sync_display_sign)
-	);
+set_max_delay 5.0 -from [get_cells dut/result], [get_cells dut/n], [get_cells dut/z], [get_cells dut/c], [get_cells dut/v] -to [get_cells uut_converter/bin]
 
+set_max_delay 5.0 -from [get_cells uut_converter/bin_unit], [get_cells uut_unit_d/bcd_number] -to [get_cells uut_sdu/d]
 
-endmodule
+set_max_delay 5.0 -from [get_cells uut_converter/bin_ten], [get_cells uut_ten_d/bcd_number] -to [get_cells uut_sdt/d]
+
+set_max_delay 5.0 -from [get_cells uut_sign/seg] -to [get_cells uut_sds/d]
