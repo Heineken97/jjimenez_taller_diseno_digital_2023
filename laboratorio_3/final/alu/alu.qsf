@@ -61,13 +61,6 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name SYSTEMVERILOG_FILE test/tb_bin_converte.sv
-set_global_assignment -name SYSTEMVERILOG_FILE src/display_sign.sv
-set_global_assignment -name SYSTEMVERILOG_FILE src/bin_to_bcd_decoder.sv
-set_global_assignment -name SYSTEMVERILOG_FILE src/bin_converter.sv
-set_global_assignment -name SYSTEMVERILOG_FILE src/top_module.sv
-set_global_assignment -name SYSTEMVERILOG_FILE src/alu.sv
-set_global_assignment -name SYSTEMVERILOG_FILE test/alu_tb.sv
 set_location_assignment PIN_AB12 -to change_switches
 set_location_assignment PIN_Y19 -to flags[0]
 set_location_assignment PIN_W20 -to flags[1]
@@ -108,4 +101,15 @@ set_location_assignment PIN_AF30 -to display_tens[1]
 set_location_assignment PIN_AD27 -to display_tens[0]
 set_location_assignment PIN_W19 -to leftover_leds[1]
 set_location_assignment PIN_W17 -to leftover_leds[0]
+set_global_assignment -name SYSTEMVERILOG_FILE test/tb_bin_converte.sv
+set_global_assignment -name SYSTEMVERILOG_FILE test/alu_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/top_module.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/sign_to_display.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/register.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/bin_to_bcd_decoder.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/bin_converter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/alu.sv
+set_global_assignment -name SYSTEMVERILOG_FILE test/register_tb.sv
+set_location_assignment PIN_AF14 -to clk
+set_location_assignment PIN_AA14 -to reset
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
