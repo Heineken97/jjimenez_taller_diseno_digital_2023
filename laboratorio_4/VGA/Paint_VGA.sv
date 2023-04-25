@@ -8,5 +8,4 @@ module Paint_VGA(
 	
 	assign {Red, Blue} = (y[3]==0) ? {{8{pixel}},8'h00} : {8'h00,{8{pixel}}};
 	assign Green = inrect ? 8'hFF : 8'h00;
-	
 endmodule

@@ -13,5 +13,5 @@ module Controller_VGA(
 						Synchronizer_VGA(CLK_VGA, SYNC_H, SYNC_V, SYNC_B, SYNC_BLANK, x, y);
 						
 	Paint_VGA Paint_VGA(x, y, Red, Green, Blue);
-
+	
 endmodule

@@ -30,6 +30,7 @@ module Synchronizer_VGA#(parameter
 			h_count <= h_count + 1;
 			x <= x + 1;
 		end
+		
 	end
 	
 	assign SYNC_H = ~(h_count >= HACTIVE + HFP & h_count < HACTIVE + HFP + HSYN);
