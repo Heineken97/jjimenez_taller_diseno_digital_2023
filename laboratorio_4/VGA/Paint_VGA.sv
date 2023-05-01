@@ -1,7 +1,6 @@
 module Paint_VGA(
 	input logic [9:0] x, y,
 	output logic [7:0] Red, Green, Blue);
-	
 	logic [9:0] initXMatrix = 10'd0;
    logic [9:0] initYMatrix = 10'd0;
    logic [9:0] N_side = 10'd480;
@@ -9,10 +8,10 @@ module Paint_VGA(
 	//logic [7:0] img_selected = y[8:3]; 
 	
 	logic [7:0] w_red, w_green, w_blue;
-	logic paint,pixel,inLine,inSquare;
+	logic paint,inLine,inSquare, pixel_0,pixel_1,pixel_2,pixel_3,pixel_4,pixel_5,pixel_6,pixel_7,pixel_8,pixel_9,pixel_10,pixel_11;
 	
-	Memory_VGA Memory(y[8:3] - 10'b11000, x[6:0] - 10'b1100000000, y[6:0], pixel);
-	
+	Memory_VGA Memory(y[8:3], x[6:0], y[6:0], pixel);
+
 	SquareGen_VGA MatrixBackground(.x(x),.y(y),.initX(initXMatrix),.initY(initYMatrix),.n(N_side),.inSquare(inSquare));
 	
 	LineGen_VGA MatrixLines(.x(x), .y(y), .initX(initXMatrix), .initY(initYMatrix), .n(N_side), .inLine(inLine));
@@ -27,6 +26,7 @@ module Paint_VGA(
 			w_blue  <= 8'd26; 
 			w_green <= 8'd28;
 		end else if (inSquare && inLine) begin
+			
 			w_red   <= 8'd243;
 			w_green <= 8'd114;
 			w_blue  <= 8'd32;
