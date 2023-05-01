@@ -12,30 +12,23 @@ module Synchronizer_VGA#(parameter
 	input logic CLK_VGA,
 	output logic SYNC_H, SYNC_V, SYNC_B, SYNC_BLANK,
 	output logic [9:0] x, y);
-	
-	logic [9:0] h_count, v_count;
-	
+		
 	always @(posedge CLK_VGA) begin
-		if(h_count >= HMAX)begin
-			h_count <= 0;
+		if(x >= HMAX)begin
 			x <= 0;
-			if(v_count >= VMAX)begin
-				v_count <= 0;
+			if(y >= VMAX)begin
 				y <= 0;
 			end else begin
-				v_count <= v_count + 1;
 				y <= y + 1;
 			end
 		end else begin
-			h_count <= h_count + 1;
 			x <= x + 1;
 		end
-		
 	end
 	
-	assign SYNC_H = ~(h_count >= HACTIVE + HFP & h_count < HACTIVE + HFP + HSYN);
-	assign SYNC_V = ~(v_count >= VACTIVE + VFP & v_count < VACTIVE + VFP + VSYN);
+	assign SYNC_H = ~(x >= HACTIVE + HFP & x < HACTIVE + HFP + HSYN);
+	assign SYNC_V = ~(y >= VACTIVE + VFP & y < VACTIVE + VFP + VSYN);
 	assign SYNC_B = SYNC_H & SYNC_V;
-	assign SYNC_BLANK = (h_count < HACTIVE) & (v_count < VACTIVE);
+	assign SYNC_BLANK = (x < HACTIVE) & (y < VACTIVE);
 	
 endmodule
