@@ -8,8 +8,8 @@ module Synchronizer_VGA#(parameter
 	VACTIVE	= 10'd480,
 	VFP 		= 10'd11,
 	VSYN 		= 10'd2,
-	VMAX 		= VACTIVE + VFP + VSYN + VBP)(
-	input logic CLK_VGA,
+	VMAX 		= VACTIVE + VFP + VSYN + VBP)
+	(input logic CLK_VGA,
 	output logic SYNC_H, SYNC_V, SYNC_B, SYNC_BLANK,
 	output logic [9:0] x, y);
 	
