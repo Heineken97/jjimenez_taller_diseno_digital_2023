@@ -9,7 +9,8 @@ module Paint_VGA(
 	reg  initX = 0, initY = 0;
 	logic [7:0] w_red, w_green, w_blue;
 	logic square_0,paint,inLine, pixel_0,pixel_1,pixel_2,pixel_3,pixel_4,pixel_5,
-			pixel_6,pixel_7,pixel_8,pixel_9,pixel_10,pixel_11,pixel_13,pixel_14,pixel_15,finish = 1'b1,winner = 1'b1;
+			pixel_6,pixel_7,pixel_8,pixel_9,pixel_10,pixel_11,pixel_13,pixel_14,pixel_15;
+	logic winner = 'd0;
 
 	Memory_VGA Memory_0(.yoff(x[6:0]), .xoff(y[6:0]),.pixel(pixel_0), .memorySelect(matrix_table[3][3]));
 	Memory_VGA Memory_1(.yoff(x[6:0]), .xoff(y[6:0]),.pixel(pixel_1), .memorySelect(matrix_table[3][2]));
@@ -179,20 +180,27 @@ module Paint_VGA(
 			w_green <= 8'd12;
 			w_blue  <= 8'd63;	
 					
-		end else if ((initX+500 <= x && x < initX+600 && initY+180 <= y && y < initY+300)  && pixel_continue== 1'b1) begin 
+		end else if (winner== 'd2 &&(initX+500 <= x && x < initX+600 && initY+180 <= y && y < initY+300)  && pixel_continue== 1'b1) begin 
 			w_red   <= 8'hFF;
 			w_blue  <= 8'hFF; 
 			w_green <= 8'hFF;
-		end else if ((initX+500 <= x && x < initX+600 && initY+180 <= y && y < initY+300)  && pixel_continue== 1'b0) begin 
+		end else if (winner== 'd2 &&(initX+500 <= x && x < initX+600 && initY+180 <= y && y < initY+300)  && pixel_continue== 1'b0) begin 
 			w_red   <= 8'd250;
 			w_blue  <= 8'd250; 
 			w_green <= 8'd0;
-			
-		end else if (finish== 1'b1 && winner== 1'b1 && (initX+500 <= x && x < initX+600 && initY+180 <= y && y < initY+300)  && pixel_continue== 1'b0) begin 
+		end else if (winner== 'd1 && (initX+500 <= x && x < initX+600 && initY+180 <= y && y < initY+300)  && pixel_continue== 1'b1) begin 
+			w_red   <= 8'hFF;
+			w_blue  <= 8'hFF; 
+			w_green <= 8'hFF;	
+		end else if (winner== 'd1 && (initX+500 <= x && x < initX+600 && initY+180 <= y && y < initY+300)  && pixel_continue== 1'b0) begin 
 			w_red   <= 8'd0;
 			w_blue  <= 8'd30; 
 			w_green <= 8'h250;
-		end else if (finish== 1'b1 && winner== 1'b0 && (initX+500 <= x && x < initX+600 && initY+180 <= y && y < initY+300)  && pixel_continue== 1'b0) begin 
+		end else if (winner== 'd0 && (initX+500 <= x && x < initX+600 && initY+180 <= y && y < initY+300)  && pixel_continue== 1'b1) begin 
+			w_red   <= 8'hFF;
+			w_blue  <= 8'hFF; 
+			w_green <= 8'hFF;
+		end else if (winner== 'd0 && (initX+500 <= x && x < initX+600 && initY+180 <= y && y < initY+300)  && pixel_continue== 1'b0) begin 
 			w_red   <= 8'd250;
 			w_blue  <= 8'd30; 
 			w_green <= 8'd0;
