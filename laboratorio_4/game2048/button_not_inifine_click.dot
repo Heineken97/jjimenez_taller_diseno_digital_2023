@@ -1,0 +1,11 @@
+digraph estados {
+    rankdir=LR;
+    node [shape=doublecircle]; 
+    IDLE;
+    node [shape=circle];
+
+    IDLE -> PRESSED [label="~botton=1, out = 0"];
+    PRESSED -> WAIT_RELEASE[label="out = 1"];
+    WAIT_RELEASE -> WAIT_RELEASE [label="~botton=1, out = 0"];
+    WAIT_RELEASE -> IDLE [label="~botton=0, out = 0"];
+}
