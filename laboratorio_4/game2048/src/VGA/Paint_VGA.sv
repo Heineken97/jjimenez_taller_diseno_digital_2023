@@ -11,7 +11,7 @@ module Paint_VGA(
 	logic [7:0] w_red, w_green, w_blue;
 	logic square_0,paint,inLine, pixel_0,pixel_1,pixel_2,pixel_3,pixel_4,pixel_5,
 			pixel_6,pixel_7,pixel_8,pixel_9,pixel_10,pixel_11,pixel_13,pixel_14,pixel_15;
-	logic winner = 'd0;
+
 
 	Memory_VGA Memory_0(.yoff(x[6:0]), .xoff(y[6:0]),.pixel(pixel_0), .memorySelect(matrix_table[3][3]));
 	Memory_VGA Memory_1(.yoff(x[6:0]), .xoff(y[6:0]),.pixel(pixel_1), .memorySelect(matrix_table[3][2]));
@@ -31,7 +31,7 @@ module Paint_VGA(
 	Memory_VGA Memory_15(.yoff(x[6:0]), .xoff(y[6:0]),.pixel(pixel_15), .memorySelect(matrix_table[0][0]));
 	LineGen_VGA MatrixLines(.x(x), .y(y), .initX(initXMatrix), .initY(initYMatrix), .n(N_side), .inLine(inLine));
 	
-	Memory_VGA Memory_16(.yoff(x[6:0]), .xoff(y[6:0]),.pixel(pixel_continue), .memorySelect(2));
+	Memory_VGA Memory_16(.yoff(x[6:0]), .xoff(y[6:0]),.pixel(pixel_continue), .memorySelect(0));
 	
 	always_comb begin
 	
