@@ -90,10 +90,36 @@ module top_module (
 		.bcd_number(display_hundred_thousands)
 	);
 
+		button_debouncer bd_top (
+		.clk(clk),
+		.reset(rst_switch),
+		.button_in(top_button),
+		.button_out(direction[0])
+	);
+	button_debouncer bd_bottom (
+		.clk(clk),
+		.reset(rst_switch),
+		.button_in(bottom_button),
+		.button_out(direction[1])
+	);
+	button_debouncer bd_left (
+		.clk(clk),
+		.reset(rst_switch),
+		.button_in(left_button),
+		.button_out(direction[2])
+	);
+	button_debouncer bd_right (
+		.clk(clk),
+		.reset(rst_switch),
+		.button_in(right_button),
+		.button_out(direction[3])
+	);
+
+
 	// Asignación de game_state y botones a game_state_leds
 	assign game_state_leds = {~right_button, ~left_button, ~bottom_button, ~top_button, 1'b0,1'b0,1'b0,1'b0, game_state};
 
-	// Asignación de botones a direction
-	assign direction = {~right_button, ~left_button, ~bottom_button,~ top_button};
+	// // Asignación de botones a direction
+	// assign direction = {~right_button, ~left_button, ~bottom_button,~ top_button};
 
 endmodule
