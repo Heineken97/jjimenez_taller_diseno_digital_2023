@@ -52,16 +52,37 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
-set_global_assignment -name SYSTEMVERILOG_FILE top_module.sv
-set_global_assignment -name SYSTEMVERILOG_FILE dmem.sv
-set_global_assignment -name SYSTEMVERILOG_FILE imem.sv
-set_global_assignment -name SYSTEMVERILOG_FILE armv4.sv
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name SYSTEMVERILOG_FILE controller.sv
-set_global_assignment -name SYSTEMVERILOG_FILE decoder.sv
-set_global_assignment -name SYSTEMVERILOG_FILE conditionalLogic.sv
-set_global_assignment -name SYSTEMVERILOG_FILE condcheck.sv
-set_global_assignment -name SYSTEMVERILOG_FILE flopenr.sv
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH testbench -section_id eda_simulation
+set_global_assignment -name EDA_TEST_BENCH_NAME testbench -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id testbench
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME testbench -section_id testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE testbench.sv -section_id testbench
+set_global_assignment -name VERILOG_FILE src/vga/pll.v
+set_global_assignment -name QIP_FILE src/vga/pll.qip
+set_global_assignment -name SOURCE_FILE src/vga/pll.cmp
+set_global_assignment -name SYSTEMVERILOG_FILE src/top_module.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/dmem.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/imem.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/armv4.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/controller.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/decoder.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/conditionalLogic.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/condcheck.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/flopenr.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/testbench.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/vga/controller_VGA.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/vga/synchronizer_VGA.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/vga/paint_VGA.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/Memory_ROM.sv
+set_global_assignment -name TEXT_FILE src/image_OLD.txt
+set_global_assignment -name TEXT_FILE src/image_NEW.txt
+set_global_assignment -name TEXT_FILE src/image_BACKGROUND.txt
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
