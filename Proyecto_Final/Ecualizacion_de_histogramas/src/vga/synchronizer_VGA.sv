@@ -11,9 +11,9 @@ module synchronizer_VGA#(parameter
 	VMAX 		= VACTIVE + VFP + VSYN + VBP)(
 	input logic CLK_VGA,
 	output logic SYNC_H, SYNC_V, SYNC_B, SYNC_BLANK,
-	output logic [9:0] X, Y);
+	output logic [31:0] X, Y);
 	
-	logic [9:0] h_count, v_count;
+	logic [31:0] h_count, v_count;
 	
 	always @(posedge CLK_VGA) begin
 		if(h_count >= HMAX)begin
