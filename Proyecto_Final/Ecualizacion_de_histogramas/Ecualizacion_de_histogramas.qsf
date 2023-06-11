@@ -81,9 +81,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE src/vga/controller_VGA.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/vga/synchronizer_VGA.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/vga/paint_VGA.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/Memory_ROM.sv
-set_global_assignment -name TEXT_FILE src/image_OLD.txt
-set_global_assignment -name TEXT_FILE src/image_NEW.txt
-set_global_assignment -name TEXT_FILE src/image_BACKGROUND.txt
 set_location_assignment PIN_B13 -to Blue[0]
 set_location_assignment PIN_G13 -to Blue[1]
 set_location_assignment PIN_H13 -to Blue[2]

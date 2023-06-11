@@ -1,47 +1,53 @@
 module testbench_Memory_ROM;
-  reg CLK;
-  reg [7:0] yoff, xoff;
-  reg [2:0] memorySelect;
-  wire pixel;
-
-  initial begin
-    // Inicializar las entradas
-    CLK = 0;
-    yoff = 8'b00000000;
-    xoff = 8'b00000000;
-    memorySelect = 3'b000;
-
-    // Generar un pulso de reloj cada 10 unidades de tiempo
-    forever #10 CLK = ~CLK;
-
-    // Esperar un tiempo para que el valor de salida se estabilice
-    #100;
-
-    // Mostrar el valor del pixel obtenido
-    $display("Pixel obtenido: %b", pixel);
-
-    // Cambiar las entradas para leer de otro segmento de memoria
-    yoff = 8'b00000001;
-    xoff = 8'b00000001;
-    memorySelect = 3'b001;
-
-    // Esperar un tiempo para que el valor de salida se estabilice
-    #100;
-
-    // Mostrar el valor del pixel obtenido
-    $display("Pixel obtenido: %b", pixel);
-
-    // Agregar más pruebas según sea necesario
-
-    // Finalizar la simulación
-    $finish;
-  end
-
-  // Instanciar el módulo Memory_ROM con la señal de reloj CLK
-  Memory_ROM dut(
+  
+  // Parámetros
+  parameter MEM_DEPTH = 256;
+  
+  // Señales
+  logic [7:0] yoff, xoff;
+  logic [2:0] memorySelect;
+  logic pixel;
+  
+  // Instancia del módulo Memory_ROM
+  Memory_ROM dut (
     .yoff(yoff),
     .xoff(xoff),
     .memorySelect(memorySelect),
     .pixel(pixel)
-	 );
+  );
+  
+  // Generador de estímulos
+  initial begin
+    // Inicializar señales
+    yoff = 0;
+    xoff = 0;
+    memorySelect = 1;
+    
+    // Esperar un ciclo antes de leer datos
+    #1;
+  
+    // Leer y mostrar datos de la memoria ROM
+    repeat (MEM_DEPTH) begin
+      // Leer datos
+      #1; // Esperar un ciclo antes de cambiar las entradas
+      $display("xoff = %d, yoff = %d, memorySelect = %d, pixel = %d",
+               xoff, yoff, memorySelect, pixel);
+      
+      // Incrementar las direcciones
+      yoff = yoff + 1;
+      if (yoff == 256) begin
+        yoff = 0;
+		end
+		xoff = xoff + 1;
+      if (xoff == 256) begin
+		xoff = 0;
+		end
+    end
+    
+    // Finalizar simulación
+    #1;
+    $finish;
+  end
+  
 endmodule
+
