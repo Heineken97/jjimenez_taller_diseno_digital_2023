@@ -59,16 +59,8 @@ set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
-set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH testbench -section_id eda_simulation
-set_global_assignment -name EDA_TEST_BENCH_NAME testbench -section_id eda_simulation
-set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id testbench
-set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME testbench -section_id testbench
-set_global_assignment -name EDA_TEST_BENCH_FILE testbench.sv -section_id testbench
-set_global_assignment -name EDA_TEST_BENCH_NAME testbench_Memory_ROM -section_id eda_simulation
-set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id testbench_Memory_ROM
-set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME testbench_Memory_ROM -section_id testbench_Memory_ROM
-set_global_assignment -name EDA_TEST_BENCH_FILE src/testbench_Memory_ROM.sv -section_id testbench_Memory_ROM
+
+set_global_assignment -name LICENSE_FILE src/arm_processor/memfile.dat
 set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/regfile.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/mux2.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/imem.sv
@@ -85,5 +77,4 @@ set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/armv4.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/alu.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/adder.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/top_module.sv
-set_global_assignment -name SYSTEMVERILOG_FILE src/testbench.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

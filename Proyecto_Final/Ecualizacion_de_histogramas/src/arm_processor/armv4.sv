@@ -1,7 +1,7 @@
 module armv4(
 	input 	logic 			clk ,
 	input 	logic 			rst ,
-	input 	logic 			Instruction ,
+	input 	logic Instruction ,
 	input 	logic [31:0] 	ReadData,
 	output 	logic [31:0] 	PC,
 	output 	logic [31:0] 	ALUResult,
