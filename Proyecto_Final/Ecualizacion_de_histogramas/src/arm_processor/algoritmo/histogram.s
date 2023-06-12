@@ -1,10 +1,4 @@
 .global _start
-.section .data
-I:
-    .byte 4, 4, 4, 4
-    .byte 3, 4, 5, 4
-    .byte 3, 5, 5, 5
-    .byte 3, 4, 5, 4
 
 .section .text
 _start:
@@ -127,5 +121,15 @@ equalize_cols:
 histogram: .skip 32
 cuf:       .skip 32
 normalized_cuf: .skip 32
-.section .bss
-Ip: .skip 32
+.section .data
+I:
+    .byte 4, 4, 4, 4
+    .byte 3, 4, 5, 4
+    .byte 3, 5, 5, 5
+    .byte 3, 4, 5, 4
+
+Ip:
+    .byte 5, 5, 5, 5
+    .byte 1, 5, 7, 5
+    .byte 1, 7, 7, 7
+    .byte 1, 5, 7, 5
