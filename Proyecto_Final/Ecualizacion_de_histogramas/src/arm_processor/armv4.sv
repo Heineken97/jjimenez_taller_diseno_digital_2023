@@ -14,6 +14,7 @@ module armv4(
 	logic RegWrite, ALUSource, MemToReg, PCSource;
 	
 	controller controller(.clk(clk), .rst(rst), .Instruction(Instruction), .ALUFlags(ALUFlags), .RegSource(RegSource), .RegWrite(RegWrite),
-									.ImmediateSource(ImmediateSource), .ALUSource(ALUSource), .ALUControl(ALUControl), .MemWrite(MemWrite), .MemToReg(MemToReg), .PCSource(PCSource));
-	
+									.ImmediateSource(ImmediateSource), .ALUSource(ALUSource), .ALUControl(ALUControl), .MemWrite(MemWrite), .MemtoReg(MemToReg), .PCSource(PCSource));
+	datapath dp(.clk(clk),.rst(rst),.RegSource(RegSource), .RegWrite(RegWrite), .ImmediateSource(ImmediateSource),.ALUSrc(ALUSrc), .ALUControl(ALUControl),.MemtoReg(MemToReg), .PCSource(PCSource),.ALUFlags(ALUFlags), .PC(PC), .Instruction(Instruction),.ALUResult(ALUResult),
+				.WriteData(WriteData), .ReadData(ReadData));
 endmodule
