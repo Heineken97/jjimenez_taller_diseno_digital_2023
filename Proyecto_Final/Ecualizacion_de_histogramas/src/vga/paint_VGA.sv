@@ -8,98 +8,7 @@ module paint_VGA(
 	
 	Memory_ROM Memory0(.yoff(X[7:0]), .xoff(Y[7:0]),.pixel(pixel_old), .memorySelect(0));
 	Memory_ROM Memory1(.yoff(X[7:0]), .xoff(Y[7:0]),.pixel(pixel_new), .memorySelect(1));
-	always@(*) begin
-		if (initX+1 <= X && X < initX+255 && initY+1 <= Y && Y < initX+255 &&  pixel_old == 0) begin
-			w_red   <= 8'd0;
-			w_green <= 8'd0;
-			w_blue  <= 8'd0;
-		end
-		if (initX+1 <= X && X < initX+255 && initY+1 <= Y && Y < initX+255 &&  pixel_old == 1) begin
-			w_red   <= 8'd255;
-			w_green <= 8'd255;
-			w_blue  <= 8'd0;
-		end
-		if (initX+1 <= X && X < initX+255 && initY+1 <= Y && Y < initX+255 &&  pixel_old == 2) begin
-			w_red   <= 8'd0;
-			w_green <= 8'd255;
-			w_blue  <= 8'd0;
-		end
-		if (initX+1 <= X && X < initX+255 && initY+1 <= Y && Y < initX+255 &&  pixel_old == 3) begin
-			w_red   <= 8'd255;
-			w_green <= 8'd255;
-			w_blue  <= 8'd255;
-		end
-		if (initX+1 <= X && X < initX+255 && initY+1 <= Y && Y < initX+255 &&  pixel_old == 4) begin
-			w_red   <= 8'd0;
-			w_green <= 8'd0;
-			w_blue  <= 8'd80;
-		end
-		if (initX+1 <= X && X < initX+255 && initY+1 <= Y && Y < initX+255 &&  pixel_old == 5) begin
-			w_red   <= 8'd0;
-			w_green <= 8'd80;
-			w_blue  <= 8'd80;
-		end
-		if (initX+1 <= X && X < initX+255 && initY+1 <= Y && Y < initX+255 &&  pixel_old == 6) begin
-			w_red   <= 8'd80;
-			w_green <= 8'd0;
-			w_blue  <= 8'd80;
-		end
-		if (initX+1 <= X && X < initX+255 && initY+1 <= Y && Y < initX+255 &&  pixel_old == 7) begin
-			w_red   <= 8'd80;
-			w_green <= 8'd80;
-			w_blue  <= 8'd80;
-		end
-		if (initX+256 <= X && X < initX+511 && initX+1 <= Y && Y < initX+255 &&  pixel_new == 0) begin
-			w_red   <= 8'd0;
-			w_green <= 8'd0;
-			w_blue  <= 8'd0;
-		end
-		if (initX+256 <= X && X < initX+511 && initX+1 <= Y && Y < initX+255 &&  pixel_new == 1) begin
-			w_red   <= 8'd255;
-			w_green <= 8'd255;
-			w_blue  <= 8'd0;
-		end
-		if (initX+256 <= X && X < initX+511 && initX+1 <= Y && Y < initX+255 &&  pixel_new == 2) begin
-			w_red   <= 8'd0;
-			w_green <= 8'd255;
-			w_blue  <= 8'd0;
-		end
-		if (initX+256 <= X && X < initX+511 && initX+1 <= Y && Y < initX+255 &&  pixel_new == 3) begin
-			w_red   <= 8'd255;
-			w_green <= 8'd255;
-			w_blue  <= 8'd255;
-		end
-		if (initX+256 <= X && X < initX+511 && initX+1 <= Y && Y < initX+255 &&  pixel_new == 4) begin
-			w_red   <= 8'd0;
-			w_green <= 8'd0;
-			w_blue  <= 8'd80;
-		end
-		if (initX+256 <= X && X < initX+511 && initX+1 <= Y && Y < initX+255 &&  pixel_new == 5) begin
-			w_red   <= 8'd0;
-			w_green <= 8'd80;
-			w_blue  <= 8'd80;
-		end
-		if (initX+256 <= X && X < initX+511 && initX+1 <= Y && Y < initX+255 &&  pixel_new == 6) begin
-			w_red   <= 8'd80;
-			w_green <= 8'd0;
-			w_blue  <= 8'd80;
-		end
-		if (initX+256 <= X && X < initX+511 && initX+1 <= Y && Y < initX+255 &&  pixel_new == 7) begin
-			w_red   <= 8'd80;
-			w_green <= 8'd80;
-			w_blue  <= 8'd80;
-		end
-		else
-		begin
-			w_red   <= 8'd12;
-			w_blue  <= 8'd144; 
-			w_green <= 8'd25;
-		end
-	end
-	assign Red = w_red;
-	assign Blue = w_blue;
-	assign Green = w_green;
-	/*
+	
 	always_comb begin
 		if (initX+1 <= X && X < initX+255 && initY+1 <= Y && Y < initX+255) begin
 			case (pixel_old)
@@ -204,6 +113,9 @@ module paint_VGA(
 			w_green <= 8'd25;
 		end
 	end	
-	*/
+	
+	assign Red = w_red;
+	assign Blue = w_blue;
+	assign Green = w_green;
 	
 endmodule

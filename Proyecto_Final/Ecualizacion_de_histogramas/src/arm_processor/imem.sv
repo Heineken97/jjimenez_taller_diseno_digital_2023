@@ -6,7 +6,7 @@ module imem(
 	logic [31:0] RAM[63:0];
 	
 	initial
-		$readmemh("C:/Users/Odin/Desktop/Proyecto_Final/Ecualizacion_de_histogramas/src/arm_processor/memfile.dat", RAM);
+		$readmemh("memfile.dat", RAM);
 		
 	assign ReadData = RAM[Address[31:2]];
 	
