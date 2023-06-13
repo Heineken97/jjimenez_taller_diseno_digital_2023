@@ -81,6 +81,19 @@ set_global_assignment -name SYSTEMVERILOG_FILE src/vga/controller_VGA.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/vga/synchronizer_VGA.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/vga/paint_VGA.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/Memory_ROM.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/testbench_Memory_ROM.sv
+set_global_assignment -name EDA_TEST_BENCH_FILE testbench.sv -section_id testbench
+set_global_assignment -name EDA_TEST_BENCH_NAME testbench_Memory_ROM -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id testbench_Memory_ROM
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME testbench_Memory_ROM -section_id testbench_Memory_ROM
+set_global_assignment -name EDA_TEST_BENCH_FILE src/testbench_Memory_ROM.sv -section_id testbench_Memory_ROM
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/datapath.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/flopr.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/adder.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/mux2.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/regfile.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/extend.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/alu.sv
 set_location_assignment PIN_B13 -to Blue[0]
 set_location_assignment PIN_G13 -to Blue[1]
 set_location_assignment PIN_H13 -to Blue[2]
@@ -90,7 +103,7 @@ set_location_assignment PIN_F15 -to Blue[5]
 set_location_assignment PIN_G15 -to Blue[6]
 set_location_assignment PIN_J14 -to Blue[7]
 set_location_assignment PIN_A11 -to CLK_VGA
-set_location_assignment PIN_J9 -to Green[0]
+set_location_assignment PIN_AJ9 -to Green[0]
 set_location_assignment PIN_J10 -to Green[1]
 set_location_assignment PIN_H12 -to Green[2]
 set_location_assignment PIN_G10 -to Green[3]
@@ -111,17 +124,4 @@ set_location_assignment PIN_F10 -to SYNC_BLANK
 set_location_assignment PIN_B11 -to SYNC_H
 set_location_assignment PIN_D11 -to SYNC_V
 set_location_assignment PIN_AF14 -to clk
-set_global_assignment -name SYSTEMVERILOG_FILE src/testbench_Memory_ROM.sv
-set_global_assignment -name EDA_TEST_BENCH_FILE testbench.sv -section_id testbench
-set_global_assignment -name EDA_TEST_BENCH_NAME testbench_Memory_ROM -section_id eda_simulation
-set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id testbench_Memory_ROM
-set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME testbench_Memory_ROM -section_id testbench_Memory_ROM
-set_global_assignment -name EDA_TEST_BENCH_FILE src/testbench_Memory_ROM.sv -section_id testbench_Memory_ROM
-set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/datapath.sv
-set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/flopr.sv
-set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/adder.sv
-set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/mux2.sv
-set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/regfile.sv
-set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/extend.sv
-set_global_assignment -name SYSTEMVERILOG_FILE src/arm_processor/alu.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

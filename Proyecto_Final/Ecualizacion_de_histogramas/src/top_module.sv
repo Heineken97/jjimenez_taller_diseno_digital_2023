@@ -3,7 +3,8 @@ module top_module(
 	input 	logic 			rst ,
 	output 	logic [31:0] 	WriteData,
 	output 	logic [31:0] 	DataAddr,
-	output 	logic 			MemWrite,output logic CLK_VGA, 
+	output 	logic 			MemWrite,
+	output 	logic				CLK_VGA, 
    output 	logic 			SYNC_H, SYNC_V, SYNC_B, SYNC_BLANK, 
    output	logic [7:0] 	Red, Green, Blue
 	);

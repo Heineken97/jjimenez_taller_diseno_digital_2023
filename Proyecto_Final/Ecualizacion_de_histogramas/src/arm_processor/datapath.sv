@@ -19,6 +19,8 @@ module datapath(
 	logic [31:0] ExtImm, SrcA, SrcB, Result;
 	
 	logic [3:0] RA1, RA2;
+	
+	
 	// next PC logic
 	
 	mux2 #(32) pcmux(.d0(PCPlus4), .d1(Result), .s(PCSrc), .y(PCNext));
@@ -28,6 +30,8 @@ module datapath(
 	adder #(32) pcadd1(.a(PC), .b(32'b100), .y(PCPlus4));
 	
 	adder #(32) pcadd2(.a(PCPlus4), .b(32'b100), .y(PCPlus8));
+	
+	
 	// register file logic
 	
 	mux2 #(4) ra1mux(.d0(Instruction[19:16]), .d1(4'b1111), .s(RegSource[0]), .y(RA1));
@@ -38,8 +42,11 @@ module datapath(
 	
 	mux2 #(32) resmux(.d0(ALUResult), .d1(ReadData), .s(MemtoReg), .y(Result));
 	
-	extend ext(.Instr(Instruction[23:0]), .ImmSrc(ImmSrc), .ExtImm(ExtImm));
+	extend ext(.Instr(Instruction[23:0]), .ImmSrc(ImmediateSource), .ExtImm(ExtImm));
+	
+	
 	// ALU logic
+	
 	mux2 #(32) srcbmux(.d0(WriteData), .d1(ExtImm), .s(ALUSrc), .y(SrcB));
 	
 	alu alu(.i_ALU_Src1(SrcA), .i_ALU_Src2(SrcB), .i_ALU_Control(ALUControl), .o_ALU_Result(ALUResult), .o_ALU_Flags(ALUFlags));
